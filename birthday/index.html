@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday, Beautiful! 💜</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet" />
+    <style>
+            /* ── VARIABLES ─────────────────────────────────────────────── */
+            :root {
+                --lav: #c9b8e8;
+                --lav-light: #e8e0f7;
+                --lav-mid: #b8a5d8;
+                --lav-deep: #9b86c8;
+                --blush: #f5d0e8;
+                --blush-lt: #fce8f4;
+                --cream: #fdf8ff;
+                --txt-dark: #3d2c5e;
+                --txt-mid: #6b5a8e;
+                --txt-soft: #9b8ab8;
+                --white: #ffffff;
+                --r-card: 22px;
+                --r-img: 14px;
+            }
+
+            *, *::before, *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: 'Quicksand', sans-serif;
+                background-color: var(--cream);
+                color: var(--txt-dark);
+                min-height: 100vh;
+                overflow-x: hidden;
+            }
+
+            /* ── FIXED BACKGROUND COLLAGE ──────────────────────────────── */
+            /*
+           The background shows all 10 of your photos in a mosaic grid.
+           It stays fixed while you scroll — it does NOT move.
+           Photos appear dimmed so the content stays readable.
+        */
+            #bg-collage {
+                position: fixed;
+                inset: 0;
+                z-index: 0;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(2, 50vh);
+                gap: 3px;
+                pointer-events: none;
+                will-change: transform; /* GPU layer — prevents repaint */
+                contain: strict;
+            }
+
+                #bg-collage .bg-cell {
+                    overflow: hidden;
+                    background: #d4c8f0;
+                }
+
+                    #bg-collage .bg-cell img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: block;
+                        opacity: 0.22;
+                        filter: saturate(0.7) blur(1px);
+                        transition: opacity 0.4s ease;
+                        will-change: opacity;
+                        loading: lazy;
+                    }
+
+            /* Lavender wash over the collage */
+            #bg-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 1;
+                background: linear-gradient(135deg, rgba(201,184,232,0.55) 0%, rgba(245,208,232,0.35) 50%, rgba(232,224,247,0.55) 100%);
+                pointer-events: none;
+            }
+
+            /* ── ALL SCROLLABLE CONTENT sits above the fixed bg ─────────── */
+            #page-wrap {
+                position: relative;
+                z-index: 2;
+            }
+
+            /* ── HEADER ────────────────────────────────────────────────── */
+            header {
+                text-align: center;
+                padding: 80px 24px 56px;
+            }
+
+            .header-tag {
+                display: inline-block;
+                background: rgba(255,255,255,0.7);
+                backdrop-filter: blur(8px);
+                color: var(--txt-mid);
+                font-size: 0.78rem;
+                font-weight: 700;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                padding: 7px 18px;
+                border-radius: 100px;
+                margin-bottom: 18px;
+                border: 1.5px solid rgba(201,184,232,0.5);
+                animation: fadeUp 0.8s ease both;
+            }
+
+            header h1 {
+                font-family: 'Dancing Script', cursive;
+                font-size: clamp(2.2rem, 6.5vw, 4.8rem);
+                color: var(--txt-dark);
+                line-height: 1.15;
+                margin-bottom: 16px;
+                animation: fadeUp 0.9s 0.1s ease both;
+            }
+
+                header h1 span {
+                    background: linear-gradient(135deg, var(--lav-deep), var(--blush));
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+
+            .header-sub {
+                font-size: 1rem;
+                color: var(--txt-mid);
+                font-weight: 500;
+                max-width: 420px;
+                margin: 0 auto 28px;
+                line-height: 1.7;
+                animation: fadeUp 1s 0.2s ease both;
+            }
+
+            .header-hearts {
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                font-size: 1.4rem;
+                animation: fadeUp 1.1s 0.3s ease both;
+            }
+
+            .hb {
+                display: inline-block;
+                animation: hBounce 1.6s ease-in-out infinite;
+            }
+
+                .hb:nth-child(2) {
+                    animation-delay: .15s;
+                }
+
+                .hb:nth-child(3) {
+                    animation-delay: .30s;
+                }
+
+                .hb:nth-child(4) {
+                    animation-delay: .45s;
+                }
+
+                .hb:nth-child(5) {
+                    animation-delay: .60s;
+                }
+
+            @keyframes hBounce {
+                0%,100% {
+                    transform: translateY(0) scale(1);
+                }
+
+                50% {
+                    transform: translateY(-7px) scale(1.14);
+                }
+            }
+
+            @keyframes fadeUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(28px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* ── TIMELINE WRAPPER ──────────────────────────────────────── */
+            .timeline-section {
+                max-width: 1020px;
+                margin: 0 auto;
+                padding: 0 20px 80px;
+                position: relative;
+            }
+
+            .timeline-line {
+                position: absolute;
+                left: 50%;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                transform: translateX(-50%);
+                background: linear-gradient(to bottom, transparent 0%, var(--lav) 6%, var(--lav-mid) 50%, var(--lav) 94%, transparent 100%);
+                border-radius: 100px;
+                /* No repaints when scrolling */
+                will-change: transform;
+                contain: layout;
+            }
+
+            /* ── TIMELINE ITEM ─────────────────────────────────────────── */
+            .timeline-item {
+                position: relative;
+                display: flex;
+                justify-content: flex-end;
+                padding-right: calc(50% + 38px);
+                margin-bottom: 64px;
+                opacity: 0;
+                transform: translateY(36px);
+                /* Use transform+opacity only — GPU-composited, zero layout cost */
+                transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+                will-change: opacity, transform;
+            }
+
+                .timeline-item.right {
+                    justify-content: flex-start;
+                    padding-right: 0;
+                    padding-left: calc(50% + 38px);
+                }
+
+                .timeline-item.visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+            /* Dot */
+            .timeline-dot {
+                position: absolute;
+                left: 50%;
+                top: 28px;
+                transform: translateX(-50%);
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                background: var(--white);
+                border: 3px solid var(--lav-deep);
+                box-shadow: 0 0 0 4px rgba(155,134,200,0.18);
+                z-index: 2;
+                transition: transform 0.25s ease, box-shadow 0.25s ease;
+            }
+
+            .timeline-item:hover .timeline-dot {
+                transform: translateX(-50%) scale(1.35);
+                box-shadow: 0 0 0 7px rgba(155,134,200,0.2);
+            }
+
+            /* Connector line */
+            .tl-con {
+                position: absolute;
+                top: 34px;
+                height: 3px;
+                border-radius: 100px;
+                z-index: 1;
+            }
+
+            .timeline-item:not(.right) .tl-con {
+                background: linear-gradient(to left, var(--lav), var(--lav-light));
+                right: calc(50% + 8px);
+                width: 30px;
+            }
+
+            .timeline-item.right .tl-con {
+                background: linear-gradient(to right, var(--lav), var(--lav-light));
+                left: calc(50% + 8px);
+                width: 30px;
+            }
+
+            /* ── CARD ──────────────────────────────────────────────────── */
+            .card {
+                background: rgba(255,255,255,0.82);
+                backdrop-filter: blur(14px);
+                -webkit-backdrop-filter: blur(14px);
+                border: 1.5px solid rgba(201,184,232,0.38);
+                border-radius: var(--r-card);
+                box-shadow: 0 10px 36px rgba(155,134,200,0.2), 0 2px 8px rgba(155,134,200,0.1);
+                padding: 24px 24px 20px;
+                max-width: 400px;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+                /* Only transition transform — avoids layout thrash */
+                transition: box-shadow 0.3s ease, transform 0.3s ease;
+                contain: content;
+            }
+
+                .card::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 4px;
+                    background: linear-gradient(90deg, var(--lav-deep), var(--blush), var(--lav));
+                    border-radius: var(--r-card) var(--r-card) 0 0;
+                }
+
+                .card:hover {
+                    box-shadow: 0 20px 56px rgba(155,134,200,0.28), 0 4px 14px rgba(155,134,200,0.16);
+                    transform: translateY(-3px);
+                }
+
+            .card-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                background: linear-gradient(135deg, var(--lav-light), var(--blush-lt));
+                color: var(--txt-mid);
+                font-size: 0.7rem;
+                font-weight: 700;
+                letter-spacing: 0.12em;
+                text-transform: uppercase;
+                padding: 4px 11px;
+                border-radius: 100px;
+                margin-bottom: 10px;
+                border: 1px solid rgba(201,184,232,0.4);
+            }
+
+            .card h2 {
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.55rem;
+                color: var(--txt-dark);
+                margin-bottom: 8px;
+                line-height: 1.2;
+            }
+
+            .card p {
+                font-size: 0.9rem;
+                color: var(--txt-mid);
+                line-height: 1.75;
+                font-weight: 500;
+                margin-bottom: 16px;
+            }
+
+            /* ── PHOTO STRIP (arrow-navigated carousel) ────────────────── */
+            /*
+           Each card has a mini photo carousel.
+           Photos do NOT scroll with the page — you navigate with arrows.
+           Arrows appear on hover for desktop; always visible on mobile.
+        */
+            .photo-strip {
+                position: relative;
+                border-radius: var(--r-img);
+                overflow: hidden;
+                border: 2px solid rgba(201,184,232,0.4);
+                box-shadow: 0 4px 18px rgba(155,134,200,0.16);
+                background: linear-gradient(135deg, var(--lav-light), var(--blush-lt));
+                /* Fixed height — no reflow when navigating */
+                height: 210px;
+                contain: strict;
+            }
+
+            /* Slides container — GPU transform only */
+            .slides {
+                display: flex;
+                height: 100%;
+                transition: transform 0.38s cubic-bezier(0.25,1,0.5,1);
+                will-change: transform;
+            }
+
+            .slide {
+                min-width: 100%;
+                height: 100%;
+                position: relative;
+                cursor: zoom-in;
+                overflow: hidden;
+            }
+
+                .slide img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                    /* GPU compositing — no repaint on hover */
+                    transition: transform 0.35s ease;
+                    will-change: transform;
+                    loading: lazy;
+                }
+
+                .slide:hover img {
+                    transform: scale(1.05);
+                }
+
+            /* Broken / missing image fallback */
+            .slide-placeholder {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                color: var(--txt-soft);
+            }
+
+                .slide-placeholder .ph-icon {
+                    font-size: 2.2rem;
+                    opacity: 0.55;
+                }
+
+                .slide-placeholder span {
+                    font-size: 0.78rem;
+                    font-weight: 600;
+                    text-align: center;
+                    line-height: 1.5;
+                }
+
+            /* Arrow buttons */
+            .arrow {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 5;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: none;
+                background: rgba(255,255,255,0.82);
+                backdrop-filter: blur(6px);
+                color: var(--lav-deep);
+                font-size: 1rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 2px 10px rgba(155,134,200,0.22);
+                opacity: 0;
+                transition: opacity 0.2s ease, background 0.2s ease, transform 0.2s ease;
+                will-change: opacity;
+            }
+
+            .photo-strip:hover .arrow {
+                opacity: 1;
+            }
+
+            .arrow:hover {
+                background: var(--white);
+                transform: translateY(-50%) scale(1.08);
+            }
+
+            .arrow.prev {
+                left: 8px;
+            }
+
+            .arrow.next {
+                right: 8px;
+            }
+
+            .arrow:disabled {
+                opacity: 0 !important;
+                pointer-events: none;
+            }
+
+            /* Dot indicators */
+            .dots {
+                position: absolute;
+                bottom: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                gap: 5px;
+                z-index: 5;
+            }
+
+            .dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.5);
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+
+                .dot.active {
+                    background: var(--white);
+                    transform: scale(1.35);
+                }
+
+            /* Photo count badge */
+            .photo-count {
+                position: absolute;
+                top: 8px;
+                right: 8px;
+                background: rgba(0,0,0,0.38);
+                color: #fff;
+                font-size: 0.68rem;
+                font-weight: 700;
+                padding: 2px 8px;
+                border-radius: 100px;
+                z-index: 5;
+            }
+
+            /* ── LIGHTBOX ──────────────────────────────────────────────── */
+            /*
+           Clicking any photo opens it full-screen.
+           Arrow keys + click arrows to navigate all 10 photos.
+           Click backdrop or press Escape to close.
+        */
+            #lightbox {
+                position: fixed;
+                inset: 0;
+                z-index: 1000;
+                background: rgba(30,20,50,0.92);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.25s ease;
+                backdrop-filter: blur(6px);
+            }
+
+                #lightbox.open {
+                    opacity: 1;
+                    pointer-events: all;
+                }
+
+            .lb-img-wrap {
+                position: relative;
+                max-width: min(90vw, 860px);
+                max-height: 88vh;
+                border-radius: 18px;
+                overflow: hidden;
+                box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+            }
+
+            #lb-img {
+                display: block;
+                max-width: min(90vw, 860px);
+                max-height: 80vh;
+                width: auto;
+                height: auto;
+                border-radius: 18px;
+                object-fit: contain;
+                transition: opacity 0.2s ease;
+            }
+
+            #lb-caption {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(30,20,50,0.75));
+                color: #fff;
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.3rem;
+                padding: 28px 20px 14px;
+                text-align: center;
+            }
+
+            .lb-btn {
+                position: fixed;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1001;
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                border: none;
+                background: rgba(255,255,255,0.14);
+                color: #fff;
+                font-size: 1.4rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(6px);
+                transition: background 0.2s ease, transform 0.2s ease;
+            }
+
+                .lb-btn:hover {
+                    background: rgba(255,255,255,0.26);
+                    transform: translateY(-50%) scale(1.08);
+                }
+
+            #lb-prev {
+                left: 16px;
+            }
+
+            #lb-next {
+                right: 16px;
+            }
+
+            #lb-close {
+                position: fixed;
+                top: 18px;
+                right: 18px;
+                z-index: 1001;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: none;
+                background: rgba(255,255,255,0.14);
+                color: #fff;
+                font-size: 1.2rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                backdrop-filter: blur(6px);
+                transition: background 0.2s ease;
+            }
+
+                #lb-close:hover {
+                    background: rgba(255,255,255,0.28);
+                }
+
+            #lb-counter {
+                position: fixed;
+                bottom: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: rgba(255,255,255,0.7);
+                font-size: 0.82rem;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                z-index: 1001;
+            }
+
+            /* ── FOOTER ────────────────────────────────────────────────── */
+            footer {
+                text-align: center;
+                padding: 44px 24px 52px;
+                border-top: 1.5px solid rgba(201,184,232,0.3);
+            }
+
+            .footer-heart {
+                font-size: 1.8rem;
+                display: block;
+                margin-bottom: 12px;
+                animation: hBounce 1.8s ease-in-out infinite;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                color: var(--txt-soft);
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+
+                footer p strong {
+                    color: var(--txt-mid);
+                }
+
+            footer .fq {
+                font-family: 'Dancing Script', cursive;
+                font-size: 1.15rem;
+                color: var(--lav-deep);
+                margin-top: 10px;
+            }
+
+            /* ── MOBILE ────────────────────────────────────────────────── */
+            @media (max-width: 680px) {
+                #bg-collage {
+                    grid-template-columns: repeat(3, 1fr);
+                    grid-template-rows: repeat(4, 25vh);
+                }
+
+                .timeline-line {
+                    left: 18px;
+                    transform: none;
+                }
+
+                .timeline-item,
+                .timeline-item.right {
+                    justify-content: flex-start;
+                    padding-left: 54px;
+                    padding-right: 0;
+                    margin-bottom: 48px;
+                }
+
+                .timeline-dot {
+                    left: 18px;
+                    transform: translateX(-50%);
+                    top: 22px;
+                }
+
+                .timeline-item:hover .timeline-dot {
+                    transform: translateX(-50%) scale(1.3);
+                }
+
+                .timeline-item:not(.right) .tl-con,
+                .timeline-item.right .tl-con {
+                    left: 26px;
+                    right: auto;
+                    width: 28px;
+                    top: 28px;
+                    background: linear-gradient(to right, var(--lav), var(--lav-light));
+                }
+
+                .card {
+                    max-width: 100%;
+                }
+                /* Always show arrows on mobile */
+                .arrow {
+                    opacity: 0.75;
+                }
+            }
+    </style>
+</head>
+<body>
+
+    <!-- ── FIXED BACKGROUND COLLAGE ──────────────────────────────── -->
+    <!--
+      These 10 cells show your photos as a soft mosaic behind everything.
+      Name your photos photo1.jpg through photo10.jpg and they'll appear automatically.
+      The overlay keeps it soft so the content is still easy to read.
+    -->
+    <div id="bg-collage" aria-hidden="true">
+        <!-- REPLACE src values with your photo filenames if different -->
+        <div class="bg-cell"><img src="photo1.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo2.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo3.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo4.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo5.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo6.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo7.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo8.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo9.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+        <div class="bg-cell"><img src="photo10.jpg" alt="" loading="lazy" onerror="this.style.opacity=0" /></div>
+    </div>
+
+    <!-- Lavender wash over the collage -->
+    <div id="bg-overlay" aria-hidden="true"></div>
+
+    <!-- ── ALL PAGE CONTENT ──────────────────────────────────────── -->
+    <div id="page-wrap">
+
+        <!-- HEADER -->
+        <header>
+            <div class="header-tag">✨ A little something for you ✨</div>
+            <h1>Happy Birthday, <span>Joelle!</span> 💜</h1>
+            <p class="header-sub">
+                Scroll through our memories — from the very first picture to today.
+                Wag mo sabihing ang pangit ng pinili kong picture suss. Happy Birthday, Love!
+            </p>
+            <div class="header-hearts">
+                <span class="hb">🌸</span>
+                <span class="hb">💜</span>
+                <span class="hb">✨</span>
+                <span class="hb">💜</span>
+                <span class="hb">🌸</span>
+            </div>
+        </header>
+
+        <!-- TIMELINE -->
+        <section class="timeline-section">
+            <div class="timeline-line" aria-hidden="true"></div>
+
+            <!-- ══════════════════════════════════════════════════════
+                 CARD 1 — Left  |  Photos: photo1, photo2, photo3
+            ══════════════════════════════════════════════════════ -->
+            <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="tl-con" aria-hidden="true"></div>
+                <div class="card">
+                    <div class="card-badge">🌟 The Very Beginning</div>
+                    <h2>The Day Everything Changed</h2>
+                    <p>
+                        Remember the first time we met? I was trying to look cool kasi may gusto na ako sayo that time. But still di parin kasi nahalata mo talaga nun. This was our first pic(nacrop). Hanggang sa tumagal talaga tayo through the years, I am still so grateful for that day. For you. For us. That was the beginning.
+                    </p>
+
+                    <!-- PHOTO CAROUSEL — 3 photos for this card -->
+                    <!-- ✏️ Rename your files to match the src values below -->
+                    <div class="photo-strip" data-card="0">
+                        <div class="slides">
+                            <div class="slide" data-src="photo1.jpg" data-caption="The Very Beginning">
+                                <!-- REPLACE src → photo1.jpg -->
+                                <img src="photo1.jpg" alt="Memory 1"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo1.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo2.jpg" data-caption="Still the beginning...">
+                                <!-- REPLACE src → photo2.jpg -->
+                                <img src="photo2.jpg" alt="Memory 2"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo2.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo3.jpg" data-caption="Just the start of us">
+                                <!-- REPLACE src → photo3.jpg -->
+                                <img src="photo3.jpg" alt="Memory 3"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo3.jpg</span></div>'" />
+                            </div>
+                        </div>
+                        <button class="arrow prev" aria-label="Previous photo">&#8592;</button>
+                        <button class="arrow next" aria-label="Next photo">&#8594;</button>
+                        <div class="dots"></div>
+                        <div class="photo-count"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════════
+                 CARD 2 — Right  |  Photos: photo4, photo5, photo6
+            ══════════════════════════════════════════════════════ -->
+            <div class="timeline-item right">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="tl-con" aria-hidden="true"></div>
+                <div class="card">
+                    <div class="card-badge">🍕 The First Kiss</div>
+                    <h2>The First Day We Kissed</h2>
+                    <p>
+                        It was March 7, 2025 when where just hanging out doon sa gaisano. I was just joking about kissing you eh
+                        then nag open ka ng camera and hey 3 hours tayo don, sadly di ko na naopen yung gmail na pinag savan ko ng video.
+                        But I will never forget that day. I was so nervous kasi nga first time tas tinakot mo pa na pag kniss ka
+                        di kana magrereply. But still I kissed you. Pumunta pa tayo jan sa fav spot natin eh which is Daraga church.
+                        That was one of the best day of my life.
+                    </p>
+
+                    <!-- PHOTO CAROUSEL — 3 photos for this card -->
+                    <div class="photo-strip" data-card="1">
+                        <div class="slides">
+                            <div class="slide" data-src="photo4.jpg" data-caption="3 hours nag video eh">
+                                <!-- REPLACE src → photo4.jpg -->
+                                <img src="photo4.jpg" alt="Memory 4"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo4.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo5.jpg" data-caption="First kiss dayy">
+                                <!-- REPLACE src → photo5.jpg -->
+                                <img src="photo5.jpg" alt="Memory 5"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo5.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo6.jpg" data-caption="Next picture">
+                                <!-- REPLACE src → photo6.jpg -->
+                                <img src="photo6.jpg" alt="Memory 6"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo6.jpg</span></div>'" />
+                            </div>
+                        </div>
+                        <button class="arrow prev" aria-label="Previous photo">&#8592;</button>
+                        <button class="arrow next" aria-label="Next photo">&#8594;</button>
+                        <div class="dots"></div>
+                        <div class="photo-count"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════════
+                 CARD 3 — Left  |  Photos: photo7, photo8
+            ══════════════════════════════════════════════════════ -->
+            <div class="timeline-item">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="tl-con" aria-hidden="true"></div>
+                <div class="card">
+                    <div class="card-badge">🌙 The Sleepover Era</div>
+                    <h2>The Day and Night we're Together</h2>
+                    <p>
+                        Eto yung isa pa sa best moments eh. First time din natin to na magkasama sa iisang kwarto and lagi magkasama
+                        like wala tayong pinag awayan nung mga araw na yan hahaha. We enjoyed every day and night that we're together.
+                        Ang saya and super ganda sa pakiramdam na naranasan natin yung ganon experience. I imagine us having our own
+                        family and living in one house. Ganon naisip ko na gusto ko mangyari. And alam kong mauulit marin yun kahit tayong dalawa lang.✨
+                    </p>
+
+                    <!-- PHOTO CAROUSEL — 2 photos for this card -->
+                    <div class="photo-strip" data-card="2">
+                        <div class="slides">
+                            <div class="slide" data-src="photo7.jpg" data-caption="Naga Era">
+                                <!-- REPLACE src → photo7.jpg -->
+                                <img src="photo7.jpg" alt="Memory 7"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo7.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo8.jpg" data-caption="Best moments">
+                                <!-- REPLACE src → photo8.jpg -->
+                                <img src="photo8.jpg" alt="Memory 8"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo8.jpg</span></div>'" />
+                            </div>
+                        </div>
+                        <button class="arrow prev" aria-label="Previous photo">&#8592;</button>
+                        <button class="arrow next" aria-label="Next photo">&#8594;</button>
+                        <div class="dots"></div>
+                        <div class="photo-count"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ══════════════════════════════════════════════════════
+                 CARD 4 — Right  |  Photos: photo9, photo10
+            ══════════════════════════════════════════════════════ -->
+            <div class="timeline-item right">
+                <div class="timeline-dot" aria-hidden="true"></div>
+                <div class="tl-con" aria-hidden="true"></div>
+                <div class="card">
+                    <div class="card-badge">💜 Right Now & Always</div>
+                    <h2>Today, Tomorrow & Every Day</h2>
+                    <p>
+                        Until now we faced a lot of challenges like we are married but
+                        I know na para lang namn yun satin. We demand, we wish, we fight, we fix,
+                        and that's what we called "LOVE". From all our little moments to this one right here, I am so,
+                        so grateful for you. You are the funniest(minsan), kindest, cutest, most
+                        ridiculously beautiful person I know. Happy Birthday, my love.
+                        Here's to more memories, more adventures, and more episodes we wanna continue. 🥂
+                    </p>
+
+                    <!-- PHOTO CAROUSEL — 2 photos for this card -->
+                    <div class="photo-strip" data-card="3">
+                        <div class="slides">
+                            <div class="slide" data-src="photo9.jpg" data-caption="Today & Always">
+                                <!-- REPLACE src → photo9.jpg -->
+                                <img src="photo9.jpg" alt="Memory 9"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo9.jpg</span></div>'" />
+                            </div>
+                            <div class="slide" data-src="photo10.jpg" data-caption="Happy Birthday, my love 💜">
+                                <!-- REPLACE src → photo10.jpg -->
+                                <img src="photo10.jpg" alt="Memory 10"
+                                     loading="lazy"
+                                     onerror="this.parentElement.innerHTML='<div class=slide-placeholder><span class=ph-icon>📸</span><span>photo10.jpg</span></div>'" />
+                            </div>
+                        </div>
+                        <button class="arrow prev" aria-label="Previous photo">&#8592;</button>
+                        <button class="arrow next" aria-label="Next photo">&#8594;</button>
+                        <div class="dots"></div>
+                        <div class="photo-count"></div>
+                    </div>
+                </div>
+            </div>
+
+        </section><!-- end .timeline-section -->
+        <!-- FOOTER -->
+        <footer>
+            <span class="footer-heart">💜</span>
+            <p>Made with ❤️ by <strong>Your Childish Child</strong></p>
+            <p>Na para bang anniversary pero still, just for you on your very special day.</p>
+            <p class="fq">"Every love story is beautiful, but ours is my favourite."</p>
+        </footer>
+
+    </div><!-- end #page-wrap -->
+    <!-- ── LIGHTBOX MARKUP ─────────────────────────────────────── -->
+    <div id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button id="lb-close" aria-label="Close">✕</button>
+        <button class="lb-btn" id="lb-prev" aria-label="Previous">&#8592;</button>
+        <div class="lb-img-wrap">
+            <img id="lb-img" src="" alt="Full size photo" />
+            <div id="lb-caption"></div>
+        </div>
+        <button class="lb-btn" id="lb-next" aria-label="Next">&#8594;</button>
+        <div id="lb-counter"></div>
+    </div>
+
+    <!-- ── JAVASCRIPT ──────────────────────────────────────────── -->
+    <script>
+        /* ─────────────────────────────────────────────────────────────
+        PERFORMANCE NOTES
+        • Scroll animation uses IntersectionObserver (no scroll event)
+        • Carousel uses CSS transform (GPU only, zero layout reflow)
+        • Lightbox images are loaded on demand (not all upfront)
+        • All event listeners use { passive: true } where possible
+        • will-change declared in CSS, not toggled in JS
+        ───────────────────────────────────────────────────────────── */
+
+        /* ── 1. SCROLL ANIMATION (Intersection Observer) ─────────── */
+        const items = document.querySelectorAll('.timeline-item');
+        const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+        if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target); // fire once, then stop watching
+        }
+        });
+        }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+        items.forEach(el => io.observe(el));
+
+        /* ── 2. CAROUSEL SETUP ───────────────────────────────────── */
+        /*
+        Each .photo-strip is an independent carousel.
+        Navigation is arrow-only — scrolling the page never moves photos.
+        State is tracked in a plain array (no DOM reads in the loop).
+        */
+        const carousels = [];
+
+        document.querySelectorAll('.photo-strip').forEach((strip, idx) => {
+        const slides     = strip.querySelector('.slides');
+        const allSlides  = strip.querySelectorAll('.slide');
+        const prevBtn    = strip.querySelector('.arrow.prev');
+        const nextBtn    = strip.querySelector('.arrow.next');
+        const dotsWrap   = strip.querySelector('.dots');
+        const countBadge = strip.querySelector('.photo-count');
+        const total      = allSlides.length;
+        let   current    = 0;
+
+        /* Build dot indicators */
+        const dots = Array.from({ length: total }, (_, i) => {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        dotsWrap.appendChild(d);
+        return d;
+        });
+
+        /* Update UI without touching layout */
+        function goTo(n) {
+        current = Math.max(0, Math.min(n, total - 1));
+        /* Only transform — GPU composite, no layout */
+        slides.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+        countBadge.textContent = `${current + 1} / ${total}`;
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === total - 1;
+        }
+
+        goTo(0); // init
+
+        /* Arrow clicks — stopPropagation so card hover doesn't fire */
+        prevBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+        nextBtn.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+
+        /* Touch swipe on the strip */
+        let touchX = 0;
+        strip.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        strip.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+        }, { passive: true });
+
+        /* Click a slide → open lightbox */
+        allSlides.forEach((slide, si) => {
+        slide.addEventListener('click', () => {
+        const src     = slide.dataset.src || slide.querySelector('img')?.src || '';
+        const caption = slide.dataset.caption || '';
+        openLightbox(src, caption, idx, si);
+        });
+        });
+
+        carousels.push({ strip, allSlides, goTo, getCurrent: () => current });
+        });
+
+        /* ── 3. LIGHTBOX ─────────────────────────────────────────── */
+        /*
+        Global photo list — all slides across all cards, in order.
+        Clicking any photo opens lightbox at that global index.
+        Arrows navigate ALL 10 photos sequentially.
+        */
+        const lb        = document.getElementById('lightbox');
+        const lbImg     = document.getElementById('lb-img');
+        const lbCaption = document.getElementById('lb-caption');
+        const lbCounter = document.getElementById('lb-counter');
+        const lbClose   = document.getElementById('lb-close');
+        const lbPrev    = document.getElementById('lb-prev');
+        const lbNext    = document.getElementById('lb-next');
+
+        /* Flatten all slides globally */
+        const allPhotos = [];
+        document.querySelectorAll('.slide').forEach(slide => {
+        allPhotos.push({
+        src:     slide.dataset.src || slide.querySelector('img')?.src || '',
+        caption: slide.dataset.caption || ''
+        });
+        });
+
+        let lbIndex = 0;
+
+        function openLightbox(src, caption, cardIdx, slideIdx) {
+        /* Find global index */
+        lbIndex = allPhotos.findIndex(p => p.src === src && p.caption === caption);
+        if (lbIndex < 0) lbIndex = 0;
+        showLbPhoto(lbIndex);
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        }
+
+        function showLbPhoto(i) {
+        lbIndex = Math.max(0, Math.min(i, allPhotos.length - 1));
+        lbImg.style.opacity = 0;
+        /* Tiny delay for fade-swap effect */
+        setTimeout(() => {
+        lbImg.src = allPhotos[lbIndex].src;
+        lbCaption.textContent = allPhotos[lbIndex].caption;
+        lbCounter.textContent = `${lbIndex + 1} of ${allPhotos.length}`;
+        lbImg.style.opacity = 1;
+        }, 100);
+        lbPrev.disabled = lbIndex === 0;
+        lbNext.disabled = lbIndex === allPhotos.length - 1;
+        }
+
+        function closeLightbox() {
+        lb.classList.remove('open');
+        document.body.style.overflow = '';
+        lbImg.src = '';
+        }
+
+        lbClose.addEventListener('click', closeLightbox);
+        lbPrev.addEventListener('click', () => showLbPhoto(lbIndex - 1));
+        lbNext.addEventListener('click', () => showLbPhoto(lbIndex + 1));
+
+        /* Close on backdrop click (not on image) */
+        lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+        /* Keyboard navigation */
+        document.addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   showLbPhoto(lbIndex - 1);
+        if (e.key === 'ArrowRight')  showLbPhoto(lbIndex + 1);
+        });
+    </script>
+
+</body>
+</html>
